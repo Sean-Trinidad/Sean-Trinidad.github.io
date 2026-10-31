@@ -6,247 +6,222 @@
 <title>Sean Trinidad — Portfolio</title>
 <style>
   :root {
-    --bg:#f4f2ec; --ink:#171715; --muted:#77766f;
-    --blue:#4738f5; --lime:#d9ff54; --line:rgba(23,23,21,.18);
+    --paper: #f4f4f1;
+    --white: #fff;
+    --ink: #171717;
+    --gray: #707070;
+    --light-gray: #dededb;
+    --line: rgba(23,23,23,.2);
   }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Arial,Helvetica,sans-serif}
-  a{color:inherit;text-decoration:none}
-  button{font:inherit;color:inherit}
-  .container{width:min(1320px,92vw);margin:auto}
-  .topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--line)}
-  .logo{font-weight:900;letter-spacing:-.07em;font-size:21px}
-  .logo span{color:var(--blue)}
-  .nav{display:flex;gap:26px;align-items:center}
-  .nav a{font:700 11px monospace;text-transform:uppercase;letter-spacing:.05em}
-  .nav a:hover{color:var(--blue)}
-  .contact-link{border:1px solid var(--ink);padding:9px 14px;border-radius:99px}
-  .menu{display:none;background:transparent;border:1px solid var(--ink);border-radius:99px;padding:8px 14px;font-weight:700}
-  .hero{min-height:660px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:34px;padding:68px 0 72px}
-  .eyebrow{font:700 11px monospace;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
-  h1{font-size:clamp(62px,10vw,140px);line-height:.78;letter-spacing:-.095em;margin:24px 0 28px;font-weight:900}
-  h1 .stroke{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
-  .hero-copy p{font-size:18px;max-width:470px;margin:0}
-  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
-  .button{display:inline-flex;align-items:center;gap:12px;padding:12px 17px;border:1px solid var(--ink);border-radius:99px;font-size:12px;font-weight:800;transition:.2s}
-  .button:hover{transform:translateY(-3px);box-shadow:3px 4px 0 var(--ink)}
-  .button.primary{background:var(--ink);color:var(--bg)}
-  .hero-visual{min-height:430px;position:relative;display:grid;place-items:center}
-  .planet{width:min(350px,75vw);aspect-ratio:1;border-radius:50%;background:var(--blue);position:relative;overflow:hidden;box-shadow:14px 14px 0 var(--lime);transform:rotate(-12deg)}
-  .planet:before,.planet:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.8);border-radius:50%;width:150%;height:52%;left:-25%;top:23%;transform:rotate(38deg)}
-  .planet:after{width:105%;height:120%;left:-3%;top:-10%;transform:rotate(-36deg)}
-  .planet-core{position:absolute;width:42%;height:42%;border-radius:50%;background:var(--lime);top:28%;left:30%;box-shadow:0 0 0 16px rgba(217,255,84,.23)}
-  .orbit-dot{position:absolute;z-index:2;width:22px;height:22px;background:#ff795d;border:1px solid var(--ink);border-radius:50%;top:13%;right:22%}
-  .visual-note{position:absolute;bottom:15px;left:2%;padding:11px 14px;background:var(--bg);border:1px solid var(--ink);border-radius:12px;font:700 11px/1.5 monospace;transform:rotate(-4deg)}
-  .visual-index{position:absolute;right:0;top:4%;writing-mode:vertical-rl;font:700 10px monospace;letter-spacing:.13em}
-  .marquee{background:var(--ink);color:var(--bg);overflow:hidden;white-space:nowrap;padding:16px 0}
-  .marquee-track{display:inline-flex;animation:move 28s linear infinite}
-  .marquee span{font:800 12px monospace;letter-spacing:.13em;padding:0 24px}
-  .marquee b{color:var(--lime)}
-  @keyframes move{to{transform:translateX(-50%)}}
-  section{padding:100px 0;border-bottom:1px solid var(--line)}
-  .section-heading{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:38px}
-  .section-heading h2{font-size:clamp(44px,7vw,88px);letter-spacing:-.085em;line-height:.84;margin:10px 0 0}
-  .section-heading p{max-width:380px;margin:0;font-size:15px}
-  .approach{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px}
-  .approach-text{font-size:clamp(24px,3vw,38px);letter-spacing:-.04em;line-height:1.12}
-  .approach-text p{margin:0 0 22px}
-  .approach-text strong{color:var(--blue)}
-  .principles{border-top:1px solid var(--ink)}
-  .principle{display:grid;grid-template-columns:55px 1fr 24px;gap:15px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
-  .principle .num{font:700 11px monospace;color:var(--blue)}
-  .principle h3{font-size:19px;margin:0 0 4px;letter-spacing:-.04em}
-  .principle p{font-size:13px;color:var(--muted);margin:0}
-  .principle .plus{font-size:20px;transition:transform .2s}
-  .principle:hover .plus{transform:rotate(45deg)}
-  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-  .filter{border:1px solid var(--ink);background:transparent;border-radius:99px;padding:8px 14px;font:700 11px monospace;cursor:pointer}
-  .filter.active,.filter:hover{background:var(--ink);color:var(--bg)}
-  .work-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .work-card{border:1px solid var(--ink);border-radius:16px;overflow:hidden;background:#fff;transition:.25s}
-  .work-card:hover{transform:translateY(-5px);box-shadow:6px 7px 0 var(--ink)}
-  .work-card[hidden]{display:none}
-  .work-art{height:270px;position:relative;display:grid;place-items:center;overflow:hidden}
-  .work-card:nth-child(1) .work-art{background:#d8d0ff}
-  .work-card:nth-child(2) .work-art{background:#dcff68}
-  .work-card:nth-child(3) .work-art{background:#ffbda9}
-  .work-card:nth-child(4) .work-art{background:#d9d6ce}
-  .mock-screen{width:74%;height:72%;background:var(--bg);border:1px solid var(--ink);border-radius:8px;padding:12px;transform:rotate(-4deg);box-shadow:9px 10px 0 rgba(23,23,21,.18)}
-  .mock-top{display:flex;gap:4px;border-bottom:1px solid var(--line);padding-bottom:8px}
-  .mock-top i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
-  .mock-title{font-weight:900;font-size:clamp(18px,3vw,30px);letter-spacing:-.07em;margin:18px 0 10px}
-  .mock-line{width:90%;height:5px;background:#c6c4bc;border-radius:9px;margin:6px 0}
-  .mock-line.short{width:55%}
-  .work-info{padding:18px 20px 21px}
-  .work-meta{display:flex;justify-content:space-between;font:700 10px monospace;text-transform:uppercase;color:var(--muted)}
-  .work-info h3{font-size:29px;letter-spacing:-.07em;margin:14px 0 5px}
-  .work-info p{font-size:13px;margin:0;max-width:460px}
-  .tag-list{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}
-  .tag{border:1px solid var(--line);border-radius:99px;padding:5px 9px;font:10px monospace}
-  .process{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .process-card{min-height:230px;border:1px solid var(--ink);border-radius:16px;padding:21px;display:flex;flex-direction:column;justify-content:space-between}
-  .process-card:nth-child(1){background:var(--lime)}
-  .process-card:nth-child(2){background:#d8d0ff}
-  .process-card:nth-child(3){background:#ffbda9}
-  .process-num{font:700 11px monospace}
-  .process-card h3{font-size:29px;line-height:.95;letter-spacing:-.07em;margin:28px 0 8px}
-  .process-card p{font-size:13px;margin:0;max-width:280px}
-  .about{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}
-  .about h2{font-size:clamp(52px,8vw,98px);line-height:.82;letter-spacing:-.09em;margin:10px 0}
-  .about-copy{font-size:19px;max-width:620px}
-  .about-copy p:first-child{margin-top:0}
-  .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-  .skills span{background:var(--ink);color:var(--bg);padding:8px 12px;border-radius:99px;font:11px monospace}
-  .contact{background:var(--blue);border-radius:18px;padding:clamp(28px,7vw,76px);position:relative;overflow:hidden}
-  .contact:after{content:"↗";position:absolute;right:5%;top:-15%;font-size:clamp(120px,25vw,330px);font-weight:900;color:rgba(255,255,255,.25);transform:rotate(12deg)}
-  .contact h2{position:relative;z-index:1;font-size:clamp(48px,9vw,110px);line-height:.82;letter-spacing:-.09em;margin:14px 0;max-width:760px}
-  .contact p{position:relative;z-index:1;max-width:400px}
-  .contact .button{position:relative;z-index:1;background:var(--ink);color:var(--bg);margin-top:14px}
-  footer{display:flex;justify-content:space-between;gap:15px;padding:24px 0 32px;font:10px monospace;text-transform:uppercase}
-  .reveal{opacity:0;transform:translateY(18px);transition:.7s ease}
-  .reveal.visible{opacity:1;transform:none}
-  @media(max-width:760px){
-    .nav{display:none;position:absolute;z-index:5;top:68px;left:4vw;right:4vw;padding:20px;background:var(--bg);border:1px solid var(--ink);border-radius:14px;flex-direction:column;align-items:flex-start}
-    .nav.open{display:flex}.menu{display:block}
-    .hero{grid-template-columns:1fr;padding:50px 0 55px;gap:0}
-    .hero-visual{min-height:340px;grid-row:1}
-    .hero-copy{grid-row:2}
-    .planet{width:270px}
-    .section-heading,.approach,.about{display:grid;grid-template-columns:1fr;gap:22px}
-    .work-grid{grid-template-columns:1fr}
-    .work-art{height:235px}
-    .process{grid-template-columns:1fr}
-    section{padding:72px 0}
-    footer{flex-direction:column}
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.5 Arial, Helvetica, sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  button { color: inherit; font: inherit; }
+  .wrap { width: min(1240px, 92vw); margin: auto; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; padding:22px 0; border-bottom:1px solid var(--line); }
+  .logo { font-size:21px; font-weight:900; letter-spacing:-.07em; }
+  .logo span { color:var(--gray); }
+  .nav { display:flex; align-items:center; gap:26px; }
+  .nav a { font:700 11px monospace; letter-spacing:.06em; text-transform:uppercase; }
+  .nav a:hover { text-decoration:underline; text-underline-offset:5px; }
+  .nav .contact-link { border:1px solid var(--ink); padding:9px 14px; border-radius:99px; }
+  .menu { display:none; border:1px solid var(--ink); border-radius:99px; padding:8px 14px; background:transparent; font-weight:700; }
+  .hero { min-height:650px; display:grid; grid-template-columns:1.1fr .9fr; gap:30px; align-items:center; padding:64px 0 70px; }
+  .eyebrow { font:700 11px monospace; text-transform:uppercase; letter-spacing:.14em; color:var(--gray); }
+  h1 { margin:22px 0 24px; font-size:clamp(64px,10vw,136px); line-height:.8; letter-spacing:-.095em; }
+  h1 .outline { color:transparent; -webkit-text-stroke:1.5px var(--ink); }
+  .intro { max-width:470px; font-size:18px; }
+  .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:28px; }
+  .button { display:inline-flex; gap:12px; align-items:center; border:1px solid var(--ink); border-radius:99px; padding:12px 17px; font-size:12px; font-weight:800; transition:.2s; }
+  .button:hover { transform:translateY(-3px); box-shadow:3px 4px 0 var(--ink); }
+  .button.dark { background:var(--ink); color:var(--white); }
+  .hero-art { min-height:410px; display:grid; place-items:center; position:relative; }
+  .orb { width:min(330px,72vw); aspect-ratio:1; border-radius:50%; background:linear-gradient(135deg,#fefefe,#a8a8a8 55%,#393939); position:relative; box-shadow:18px 18px 0 #d2d2cf; overflow:hidden; transform:rotate(-12deg); }
+  .orb:before,.orb:after { content:""; position:absolute; border:1px solid rgba(255,255,255,.8); width:145%; height:55%; border-radius:50%; top:22%; left:-22%; transform:rotate(35deg); }
+  .orb:after { width:90%; height:130%; left:5%; top:-15%; transform:rotate(-35deg); }
+  .orb-center { position:absolute; width:40%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 30%,#fff,#888 65%,#222); top:30%; left:30%; box-shadow:0 0 0 18px rgba(255,255,255,.17); }
+  .orb-dot { position:absolute; z-index:1; width:20px; height:20px; border-radius:50%; background:#222; top:12%; right:22%; border:2px solid white; }
+  .art-note { position:absolute; left:1%; bottom:12px; padding:11px 14px; border:1px solid var(--ink); border-radius:10px; background:var(--white); font:700 11px/1.5 monospace; transform:rotate(-4deg); }
+  .art-index { position:absolute; top:5%; right:0; writing-mode:vertical-rl; font:700 10px monospace; letter-spacing:.13em; }
+  .marquee { overflow:hidden; white-space:nowrap; background:var(--ink); color:var(--white); padding:15px 0; }
+  .marquee-track { display:inline-flex; animation:slide 28s linear infinite; }
+  .marquee span { padding:0 23px; font:700 12px monospace; letter-spacing:.12em; }
+  .marquee b { color:#aaa; }
+  @keyframes slide { to { transform:translateX(-50%); } }
+  section { padding:96px 0; border-bottom:1px solid var(--line); }
+  .section-head { display:flex; justify-content:space-between; align-items:end; gap:25px; margin-bottom:38px; }
+  .section-head h2 { margin:9px 0 0; font-size:clamp(44px,7vw,84px); line-height:.85; letter-spacing:-.085em; }
+  .section-head p { max-width:370px; margin:0; font-size:15px; }
+  .about-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:60px; }
+  .about-copy { font-size:clamp(20px,2.5vw,30px); line-height:1.25; letter-spacing:-.03em; }
+  .about-copy p { margin:0 0 20px; }
+  .facts { border-top:1px solid var(--ink); margin-top:28px; }
+  .fact { display:grid; grid-template-columns:110px 1fr; gap:15px; padding:13px 0; border-bottom:1px solid var(--line); font-size:13px; }
+  .fact strong { font:700 10px monospace; text-transform:uppercase; color:var(--gray); }
+  .filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
+  .filter { cursor:pointer; border:1px solid var(--ink); background:transparent; border-radius:99px; padding:8px 14px; font:700 11px monospace; }
+  .filter.active,.filter:hover { background:var(--ink); color:var(--white); }
+  .work-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+  .work-card { overflow:hidden; border:1px solid var(--ink); border-radius:15px; background:var(--white); transition:.25s; }
+  .work-card:hover { transform:translateY(-5px); box-shadow:6px 7px 0 var(--ink); }
+  .work-card[hidden] { display:none; }
+  .work-visual { height:245px; display:grid; place-items:center; background:linear-gradient(140deg,#e9e9e6,#aaa); position:relative; overflow:hidden; }
+  .work-card:nth-child(2) .work-visual { background:linear-gradient(140deg,#f3f3f1,#bdbdbd); }
+  .work-card:nth-child(3) .work-visual { background:linear-gradient(140deg,#d7d7d4,#888); }
+  .work-window { width:72%; height:70%; padding:12px; border:1px solid #222; border-radius:8px; background:#fafaf8; box-shadow:9px 10px 0 rgba(0,0,0,.18); transform:rotate(-3deg); }
+  .window-dots { display:flex; gap:4px; border-bottom:1px solid #ccc; padding-bottom:8px; }
+  .window-dots i { width:6px; height:6px; border-radius:50%; background:#555; }
+  .window-title { margin:17px 0 9px; font-size:clamp(18px,3vw,30px); line-height:.9; font-weight:900; letter-spacing:-.07em; }
+  .window-line { width:88%; height:5px; background:#bbb; border-radius:9px; margin:6px 0; }
+  .window-line.short { width:55%; }
+  .work-info { padding:18px 20px 20px; }
+  .meta { display:flex; justify-content:space-between; font:700 10px monospace; text-transform:uppercase; color:var(--gray); }
+  .work-info h3 { margin:13px 0 5px; font-size:28px; letter-spacing:-.06em; }
+  .work-info p { margin:0; font-size:13px; }
+  .tags { display:flex; gap:7px; flex-wrap:wrap; margin-top:14px; }
+  .tag { border:1px solid #bbb; border-radius:99px; padding:5px 9px; font:10px monospace; }
+  .details-button { cursor:pointer; margin-top:16px; padding:0; border:0; border-bottom:1px solid var(--ink); background:none; font:700 11px monospace; }
+  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .step { min-height:220px; padding:20px; border:1px solid var(--ink); border-radius:14px; background:linear-gradient(145deg,#fff,#d4d4d1); display:flex; flex-direction:column; justify-content:space-between; }
+  .step:nth-child(2) { background:linear-gradient(145deg,#eee,#aaa); }
+  .step:nth-child(3) { background:linear-gradient(145deg,#ccc,#777); }
+  .step small { font:700 10px monospace; }
+  .step h3 { margin:25px 0 8px; font-size:27px; line-height:.95; letter-spacing:-.06em; }
+  .step p { margin:0; font-size:13px; max-width:260px; }
+  .contact { position:relative; overflow:hidden; padding:clamp(30px,7vw,72px); border-radius:16px; background:#222; color:#fff; }
+  .contact:after { content:"↗"; position:absolute; right:5%; top:-22%; color:#555; font-size:clamp(150px,28vw,340px); font-weight:900; }
+  .contact h2 { position:relative; z-index:1; margin:14px 0; max-width:760px; font-size:clamp(50px,9vw,110px); line-height:.83; letter-spacing:-.09em; }
+  .contact p { position:relative; z-index:1; max-width:390px; color:#ddd; }
+  .contact .button { position:relative; z-index:1; margin-top:14px; background:#fff; color:#111; }
+  footer { display:flex; justify-content:space-between; gap:16px; padding:24px 0 32px; font:10px monospace; text-transform:uppercase; color:var(--gray); }
+  .modal { display:none; position:fixed; inset:0; z-index:20; background:rgba(0,0,0,.65); place-items:center; padding:20px; }
+  .modal.open { display:grid; }
+  .modal-box { width:min(520px,100%); background:var(--paper); border:1px solid var(--ink); border-radius:16px; padding:28px; }
+  .modal-head { display:flex; justify-content:space-between; gap:20px; align-items:start; }
+  .modal-box h3 { font-size:32px; letter-spacing:-.06em; margin:8px 0; }
+  .modal-box p { color:#444; }
+  .close { border:1px solid var(--ink); border-radius:50%; background:transparent; width:36px; height:36px; cursor:pointer; }
+  .reveal { opacity:0; transform:translateY(16px); transition:.65s ease; }
+  .reveal.visible { opacity:1; transform:none; }
+  @media(max-width:740px) {
+    .nav { display:none; position:absolute; top:70px; left:4vw; right:4vw; z-index:10; padding:20px; background:var(--paper); border:1px solid var(--ink); border-radius:14px; flex-direction:column; align-items:flex-start; }
+    .nav.open { display:flex; }
+    .menu { display:block; }
+    .hero { grid-template-columns:1fr; padding-top:40px; }
+    .hero-art { min-height:330px; grid-row:1; }
+    .hero-copy { grid-row:2; }
+    .section-head,.about-grid { display:grid; grid-template-columns:1fr; gap:22px; }
+    .work-grid,.steps { grid-template-columns:1fr; }
+    section { padding:70px 0; }
+    footer { flex-direction:column; }
   }
-  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
-/* Grayscale theme */
-:root {
-  --bg: #f5f5f5;
-  --ink: #111111;
-  --muted: #666666;
-  --blue: #777777;
-  --lime: #e5e5e5;
-  --line: rgba(17, 17, 17, .2);
-}
-
-.orbit-dot { background: #888888; }
-
-.work-card:nth-child(1) .work-art { background: #dedede; }
-.work-card:nth-child(2) .work-art { background: #c9c9c9; }
-.work-card:nth-child(3) .work-art { background: #b5b5b5; }
-.work-card:nth-child(4) .work-art { background: #e8e8e8; }
-
-.process-card:nth-child(1) { background: #e5e5e5; }
-.process-card:nth-child(2) { background: #cccccc; }
-.process-card:nth-child(3) { background: #b5b5b5; }
-
-.contact { background: #777777; color: #ffffff; }
-.contact .eyebrow, .contact p { color: #f0f0f0; }
-.contact .button { background: #111111; color: #ffffff; }
+  @media(prefers-reduced-motion:reduce) {
+    *,*::before,*::after { animation-duration:.01ms!important; scroll-behavior:auto!important; transition-duration:.01ms!important; }
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <header class="topbar" id="top">
-    <a class="logo" href="#top">SEAN<span>®</span></a>
+<div class="wrap">
+  <header class="topbar" id="home">
+    <a class="logo" href="#home">SEAN<span> / PORTFOLIO</span></a>
     <nav class="nav" id="nav">
-      <a href="#approach">01 Approach</a><a href="#work">02 Work</a>
-      <a href="#about">03 About</a><a class="contact-link" href="#contact">Say hello ↗</a>
+      <a href="#home">Home</a><a href="#about">About me</a><a href="#works">My works</a><a class="contact-link" href="#contact">Contact ↗</a>
     </nav>
     <button class="menu" id="menu" aria-expanded="false">Menu +</button>
   </header>
 
   <main>
     <section class="hero" style="border:0">
-      <div class="hero-copy reveal">
-        <div class="eyebrow">Student · Programmer in progress · Philippines</div>
-        <h1>Ideas<br>into <span class="stroke">action.</span></h1>
-        <p>I’m Sean. I’m learning to build useful things with code, one project at a time. Here’s what I’ve been working on.</p>
-        <div class="actions"><a class="button primary" href="#work">Explore my work <span>↘</span></a><a class="button" href="#about">About me <span>↘</span></a></div>
+      <div class="reveal">
+        <div class="eyebrow">Student portfolio · Philippines</div>
+        <h1>Learning<br>to <span class="outline">build.</span></h1>
+        <p class="intro">Hi, I’m Sean. I’m a student exploring programming, problem solving, and the ideas that turn into useful projects.</p>
+        <div class="actions"><a class="button dark" href="#works">Explore my works <span>↘</span></a><a class="button" href="#about">About me <span>↘</span></a></div>
       </div>
-      <div class="hero-visual reveal">
-        <div class="visual-index">PORTFOLIO / 2026</div>
-        <div class="planet"><div class="planet-core"></div><div class="orbit-dot"></div></div>
-        <div class="visual-note">LEARN → BUILD → IMPROVE<br>SEAN TRINIDAD</div>
+      <div class="hero-art reveal">
+        <div class="art-index">A LITTLE ABOUT MY WORK / 2026</div>
+        <div class="orb"><div class="orb-center"></div><div class="orb-dot"></div></div>
+        <div class="art-note">LEARN · BUILD · IMPROVE<br>SEAN TRINIDAD</div>
       </div>
     </section>
   </main>
 </div>
 
 <div class="marquee"><div class="marquee-track">
-  <span>JAVA <b>✳</b> SQL <b>✳</b> STUDENT PROJECTS <b>✳</b> LEARNING BY BUILDING <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> STUDENT PROJECTS <b>✳</b> LEARNING BY BUILDING <b>✳</b></span>
-  <span>JAVA <b>✳</b> SQL <b>✳</b> STUDENT PROJECTS <b>✳</b> LEARNING BY BUILDING <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> STUDENT PROJECTS <b>✳</b> LEARNING BY BUILDING <b>✳</b></span>
+  <span>STUDENT PROJECTS <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> LEARNING BY BUILDING <b>✳</b> STUDENT PROJECTS <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> LEARNING BY BUILDING <b>✳</b></span>
+  <span>STUDENT PROJECTS <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> LEARNING BY BUILDING <b>✳</b> STUDENT PROJECTS <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> LEARNING BY BUILDING <b>✳</b></span>
 </div></div>
 
-<div class="container">
-  <section id="approach">
-    <div class="section-heading reveal">
-      <div><div class="eyebrow">01 / My approach</div><h2>Build with<br>purpose.</h2></div>
-      <p>I turn lessons into projects so I can understand how ideas work outside the classroom.</p>
-    </div>
-    <div class="approach">
-      <div class="approach-text reveal"><p>Every project starts with a question: <strong>what can I make work?</strong></p><p>Then I learn by trying, fixing, and improving.</p></div>
-      <div class="principles reveal">
-        <div class="principle"><span class="num">01</span><div><h3>Start with the essentials.</h3><p>Understand the goal and break it into smaller steps.</p></div><span class="plus">↗</span></div>
-        <div class="principle"><span class="num">02</span><div><h3>Make a working version.</h3><p>Use the concepts I know to build a simple solution.</p></div><span class="plus">↗</span></div>
-        <div class="principle"><span class="num">03</span><div><h3>Keep getting better.</h3><p>Review the result, find what to improve, and keep learning.</p></div><span class="plus">↗</span></div>
+<div class="wrap">
+  <section id="about">
+    <div class="section-head reveal"><div><div class="eyebrow">01 / About me</div><h2>Curious<br>by nature.</h2></div><p>A little about who I am, what I’m learning, and how I like to work.</p></div>
+    <div class="about-grid">
+      <div class="about-copy reveal"><p>I’m a student building my skills in programming and problem solving. I enjoy turning lessons into projects I can test, understand, and improve.</p><p>This portfolio is a snapshot of my learning so far—and a place for the next project to land.</p></div>
+      <div class="facts reveal">
+        <div class="fact"><strong>Currently</strong><span>Studying and building coursework projects</span></div>
+        <div class="fact"><strong>Exploring</strong><span>Java, SQL, and software development</span></div>
+        <div class="fact"><strong>Approach</strong><span>Learn by trying, testing, and improving</span></div>
       </div>
     </div>
   </section>
 
-  <section id="work">
-    <div class="section-heading reveal">
-      <div><div class="eyebrow">02 / Selected work</div><h2>Made while<br>learning.</h2></div>
-      <p>A few of my coursework projects. Use the filters to browse by topic.</p>
-    </div>
+  <section id="works">
+    <div class="section-head reveal"><div><div class="eyebrow">02 / My works</div><h2>Projects in<br>progress.</h2></div><p>Browse my coursework projects. As you add more files, you can add another project card here.</p></div>
     <div class="filters reveal">
-      <button class="filter active" data-filter="all">All projects</button>
+      <button class="filter active" data-filter="all">All work</button>
       <button class="filter" data-filter="java">Java</button>
       <button class="filter" data-filter="swing">Interface</button>
-      <button class="filter" data-filter="sql">SQL</button>
     </div>
     <div class="work-grid">
+      <article class="work-card reveal" data-category="java swing">
+        <div class="work-visual">
+          <div class="work-window"><div class="window-dots"><i></i><i></i><i></i></div><div class="window-title">CERTIFICATE<br>OF REGISTRATION</div><div class="window-line"></div><div class="window-line short"></div><div class="window-line"></div></div>
+        </div>
+        <div class="work-info">
+          <div class="meta"><span>Java · Swing</span><span>01</span></div>
+          <h3>COR Tuition Calculator</h3>
+          <p>A Java Swing Certificate of Registration app with course information, editable fees, and tuition assessment calculations.</p>
+          <div class="tags"><span class="tag">Java</span><span class="tag">Swing</span><span class="tag">BigDecimal</span></div>
+          <button class="details-button" data-project="cor">View project details ↗</button>
+        </div>
+      </article>
       <article class="work-card reveal" data-category="java">
-        <div class="work-art"><div class="mock-screen"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-title">LOST<br>& FOUND</div><div class="mock-line"></div><div class="mock-line short"></div></div></div>
-        <div class="work-info"><div class="work-meta"><span>Java · OOP</span><span>Project 01</span></div><h3>Lost & Found</h3><p>A class project for recording and searching lost and found items.</p><div class="tag-list"><span class="tag">Classes</span><span class="tag">Arrays</span><span class="tag">Inheritance</span></div></div>
-      </article>
-      <article class="work-card reveal" data-category="swing java">
-        <div class="work-art"><div class="mock-screen"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-title">STUDENT<br>RECORD</div><div class="mock-line"></div><div class="mock-line short"></div></div></div>
-        <div class="work-info"><div class="work-meta"><span>Java · Swing</span><span>Project 02</span></div><h3>Student COR</h3><p>A student record interface with tuition fee input and calculation.</p><div class="tag-list"><span class="tag">GUI</span><span class="tag">Input</span><span class="tag">Calculations</span></div></div>
-      </article>
-      <article class="work-card reveal" data-category="java">
-        <div class="work-art"><div class="mock-screen"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-title">ATM<br>SIMULATOR</div><div class="mock-line"></div><div class="mock-line short"></div></div></div>
-        <div class="work-info"><div class="work-meta"><span>Java · Console</span><span>Project 03</span></div><h3>ATM Simulator</h3><p>A practice program for common ATM actions and basic program flow.</p><div class="tag-list"><span class="tag">Methods</span><span class="tag">Conditionals</span></div></div>
-      </article>
-      <article class="work-card reveal" data-category="sql">
-        <div class="work-art"><div class="mock-screen"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-title">DATA<br>QUERIES</div><div class="mock-line"></div><div class="mock-line short"></div></div></div>
-        <div class="work-info"><div class="work-meta"><span>SQL · Database</span><span>Project 04</span></div><h3>Department Data</h3><p>Practice connecting department and location data and writing queries.</p><div class="tag-list"><span class="tag">SELECT</span><span class="tag">JOIN</span><span class="tag">Keys</span></div></div>
+        <div class="work-visual">
+          <div class="work-window"><div class="window-dots"><i></i><i></i><i></i></div><div class="window-title">YOUR NEXT<br>PROJECT</div><div class="window-line"></div><div class="window-line short"></div><div class="window-line"></div></div>
+        </div>
+        <div class="work-info">
+          <div class="meta"><span>Project file</span><span>02</span></div>
+          <h3>More work coming soon</h3>
+          <p>Add your next project file and a short description to create another card in this section.</p>
+          <div class="tags"><span class="tag">Add a file</span><span class="tag">Add a topic</span></div>
+          <button class="details-button" data-project="next">View project details ↗</button>
+        </div>
       </article>
     </div>
   </section>
 
   <section>
-    <div class="section-heading reveal"><div><div class="eyebrow">03 / The process</div><h2>Small steps.<br>Real progress.</h2></div><p>I’m building my skills through practice, curiosity, and steady improvement.</p></div>
-    <div class="process">
-      <article class="process-card reveal"><span class="process-num">STEP 01 / EXPLORE</span><div><h3>Ask better<br>questions.</h3><p>Get clear on what a project needs to do.</p></div></article>
-      <article class="process-card reveal"><span class="process-num">STEP 02 / BUILD</span><div><h3>Make it<br>work.</h3><p>Turn class concepts into a first version.</p></div></article>
-      <article class="process-card reveal"><span class="process-num">STEP 03 / IMPROVE</span><div><h3>Learn from<br>the result.</h3><p>Review, adjust, and add to what I know.</p></div></article>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="about">
-      <div class="reveal"><div class="eyebrow">04 / About Sean</div><h2>Curious<br>by nature.</h2></div>
-      <div class="about-copy reveal"><p>I’m a student developing my programming and problem-solving skills. I enjoy taking what I learn in class and turning it into something I can test and improve.</p><p>This portfolio is a snapshot of my work so far, and I’ll keep adding to it as I learn.</p><div class="skills"><span>Java</span><span>SQL</span><span>C</span><span>Problem solving</span><span>Learning every day</span></div></div>
+    <div class="section-head reveal"><div><div class="eyebrow">03 / How I work</div><h2>One step<br>at a time.</h2></div><p>I build my skills through practice, curiosity, and steady improvement.</p></div>
+    <div class="steps">
+      <article class="step reveal"><small>STEP 01 / EXPLORE</small><div><h3>Understand<br>the goal.</h3><p>Break the project into clear, manageable parts.</p></div></article>
+      <article class="step reveal"><small>STEP 02 / BUILD</small><div><h3>Make a first<br>version.</h3><p>Use what I’ve learned to create something that works.</p></div></article>
+      <article class="step reveal"><small>STEP 03 / IMPROVE</small><div><h3>Learn from<br>the result.</h3><p>Review the work and find ways to make it better.</p></div></article>
     </div>
   </section>
 
   <section id="contact" style="border:0">
-    <div class="contact reveal"><div class="eyebrow">Have a question?</div><h2>Let’s talk<br>about it.</h2><p>Reach out about a project, an idea, or just to say hello.</p><a class="button" href="mailto:your.email@example.com">Email Sean ↗</a></div>
+    <div class="contact reveal"><div class="eyebrow" style="color:#ccc">Have a question?</div><h2>Let’s get<br>in touch.</h2><p>Reach out about my work or an idea you’d like to discuss.</p><a class="button" href="mailto:your.email@example.com">Email me ↗</a></div>
   </section>
-  <footer><span>© 2026 Sean Aldrich Trinidad</span><a href="#top">Back to top ↑</a><span>Portfolio in progress</span></footer>
+
+  <footer><span>© 2026 Sean Aldrich Trinidad</span><a href="#home">Back to top ↑</a><span>Portfolio · Learning in progress</span></footer>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-head"><div><div class="eyebrow" id="modalEyebrow">Project details</div><h3 id="modalTitle"></h3></div><button class="close" id="close" aria-label="Close">×</button></div>
+    <p id="modalText"></p>
+  </div>
 </div>
 
 <script>
@@ -262,16 +237,41 @@
     menu.setAttribute("aria-expanded", "false");
     menu.textContent = "Menu +";
   }));
+
   document.querySelectorAll(".filter").forEach(button => {
     button.addEventListener("click", () => {
       document.querySelector(".filter.active").classList.remove("active");
       button.classList.add("active");
-      const category = button.dataset.filter;
+      const filter = button.dataset.filter;
       document.querySelectorAll(".work-card").forEach(card => {
-        card.hidden = category !== "all" && !card.dataset.category.includes(category);
+        card.hidden = filter !== "all" && !card.dataset.category.includes(filter);
       });
     });
   });
+
+  const details = {
+    cor: {
+      title: "COR Tuition Calculator",
+      text: "This Java Swing project displays a Certificate of Registration, course table, editable fee inputs, and a tuition assessment with a payment schedule. The attached source file is COR(2).java."
+    },
+    next: {
+      title: "Add another work sample",
+      text: "When you add another project, replace this card’s title and description, then add its category and file link."
+    }
+  };
+  const modal = document.getElementById("modal");
+  document.querySelectorAll(".details-button").forEach(button => {
+    button.addEventListener("click", () => {
+      const info = details[button.dataset.project];
+      document.getElementById("modalTitle").textContent = info.title;
+      document.getElementById("modalText").textContent = info.text;
+      modal.classList.add("open");
+    });
+  });
+  document.getElementById("close").addEventListener("click", () => modal.classList.remove("open"));
+  modal.addEventListener("click", event => { if (event.target === modal) modal.classList.remove("open"); });
+  document.addEventListener("keydown", event => { if (event.key === "Escape") modal.classList.remove("open"); });
+
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -280,7 +280,7 @@
       }
     });
   }, { threshold: .12 });
-  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  document.querySelectorAll(".reveal").forEach(item => observer.observe(item));
 </script>
 </body>
 </html>
