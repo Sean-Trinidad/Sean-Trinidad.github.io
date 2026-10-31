@@ -3,343 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sean Trinidad — Student Portfolio</title>
+<title>Sean Trinidad — Portfolio</title>
 <style>
   :root {
-    --ink: #151515;
-    --paper: #f5f3ed;
-    --lime: #d6ff42;
-    --purple: #b7a3ff;
-    --orange: #ff7655;
-    --line: rgba(21,21,21,.2);
+    --bg:#f4f2ec; --ink:#171715; --muted:#77766f;
+    --blue:#4738f5; --lime:#d9ff54; --line:rgba(23,23,21,.18);
   }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    color: var(--ink);
-    background: var(--paper);
-    font: 16px/1.5 Arial, Helvetica, sans-serif;
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Arial,Helvetica,sans-serif}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit}
+  .container{width:min(1320px,92vw);margin:auto}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--line)}
+  .logo{font-weight:900;letter-spacing:-.07em;font-size:21px}
+  .logo span{color:var(--blue)}
+  .nav{display:flex;gap:26px;align-items:center}
+  .nav a{font:700 11px monospace;text-transform:uppercase;letter-spacing:.05em}
+  .nav a:hover{color:var(--blue)}
+  .contact-link{border:1px solid var(--ink);padding:9px 14px;border-radius:99px}
+  .menu{display:none;background:transparent;border:1px solid var(--ink);border-radius:99px;padding:8px 14px;font-weight:700}
+  .hero{min-height:660px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:34px;padding:68px 0 72px}
+  .eyebrow{font:700 11px monospace;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+  h1{font-size:clamp(62px,10vw,140px);line-height:.78;letter-spacing:-.095em;margin:24px 0 28px;font-weight:900}
+  h1 .stroke{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+  .hero-copy p{font-size:18px;max-width:470px;margin:0}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+  .button{display:inline-flex;align-items:center;gap:12px;padding:12px 17px;border:1px solid var(--ink);border-radius:99px;font-size:12px;font-weight:800;transition:.2s}
+  .button:hover{transform:translateY(-3px);box-shadow:3px 4px 0 var(--ink)}
+  .button.primary{background:var(--ink);color:var(--bg)}
+  .hero-visual{min-height:430px;position:relative;display:grid;place-items:center}
+  .planet{width:min(350px,75vw);aspect-ratio:1;border-radius:50%;background:var(--blue);position:relative;overflow:hidden;box-shadow:14px 14px 0 var(--lime);transform:rotate(-12deg)}
+  .planet:before,.planet:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.8);border-radius:50%;width:150%;height:52%;left:-25%;top:23%;transform:rotate(38deg)}
+  .planet:after{width:105%;height:120%;left:-3%;top:-10%;transform:rotate(-36deg)}
+  .planet-core{position:absolute;width:42%;height:42%;border-radius:50%;background:var(--lime);top:28%;left:30%;box-shadow:0 0 0 16px rgba(217,255,84,.23)}
+  .orbit-dot{position:absolute;z-index:2;width:22px;height:22px;background:#ff795d;border:1px solid var(--ink);border-radius:50%;top:13%;right:22%}
+  .visual-note{position:absolute;bottom:15px;left:2%;padding:11px 14px;background:var(--bg);border:1px solid var(--ink);border-radius:12px;font:700 11px/1.5 monospace;transform:rotate(-4deg)}
+  .visual-index{position:absolute;right:0;top:4%;writing-mode:vertical-rl;font:700 10px monospace;letter-spacing:.13em}
+  .marquee{background:var(--ink);color:var(--bg);overflow:hidden;white-space:nowrap;padding:16px 0}
+  .marquee-track{display:inline-flex;animation:move 28s linear infinite}
+  .marquee span{font:800 12px monospace;letter-spacing:.13em;padding:0 24px}
+  .marquee b{color:var(--lime)}
+  @keyframes move{to{transform:translateX(-50%)}}
+  section{padding:100px 0;border-bottom:1px solid var(--line)}
+  .section-heading{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:38px}
+  .section-heading h2{font-size:clamp(44px,7vw,88px);letter-spacing:-.085em;line-height:.84;margin:10px 0 0}
+  .section-heading p{max-width:380px;margin:0;font-size:15px}
+  .approach{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px}
+  .approach-text{font-size:clamp(24px,3vw,38px);letter-spacing:-.04em;line-height:1.12}
+  .approach-text p{margin:0 0 22px}
+  .approach-text strong{color:var(--blue)}
+  .principles{border-top:1px solid var(--ink)}
+  .principle{display:grid;grid-template-columns:55px 1fr 24px;gap:15px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
+  .principle .num{font:700 11px monospace;color:var(--blue)}
+  .principle h3{font-size:19px;margin:0 0 4px;letter-spacing:-.04em}
+  .principle p{font-size:13px;color:var(--muted);margin:0}
+  .principle .plus{font-size:20px;transition:transform .2s}
+  .principle:hover .plus{transform:rotate(45deg)}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .filter{border:1px solid var(--ink);background:transparent;border-radius:99px;padding:8px 14px;font:700 11px monospace;cursor:pointer}
+  .filter.active,.filter:hover{background:var(--ink);color:var(--bg)}
+  .work-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .work-card{border:1px solid var(--ink);border-radius:16px;overflow:hidden;background:#fff;transition:.25s}
+  .work-card:hover{transform:translateY(-5px);box-shadow:6px 7px 0 var(--ink)}
+  .work-card[hidden]{display:none}
+  .work-art{height:270px;position:relative;display:grid;place-items:center;overflow:hidden}
+  .work-card:nth-child(1) .work-art{background:#d8d0ff}
+  .work-card:nth-child(2) .work-art{background:#dcff68}
+  .work-card:nth-child(3) .work-art{background:#ffbda9}
+  .work-card:nth-child(4) .work-art{background:#d9d6ce}
+  .mock-screen{width:74%;height:72%;background:var(--bg);border:1px solid var(--ink);border-radius:8px;padding:12px;transform:rotate(-4deg);box-shadow:9px 10px 0 rgba(23,23,21,.18)}
+  .mock-top{display:flex;gap:4px;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .mock-top i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .mock-title{font-weight:900;font-size:clamp(18px,3vw,30px);letter-spacing:-.07em;margin:18px 0 10px}
+  .mock-line{width:90%;height:5px;background:#c6c4bc;border-radius:9px;margin:6px 0}
+  .mock-line.short{width:55%}
+  .work-info{padding:18px 20px 21px}
+  .work-meta{display:flex;justify-content:space-between;font:700 10px monospace;text-transform:uppercase;color:var(--muted)}
+  .work-info h3{font-size:29px;letter-spacing:-.07em;margin:14px 0 5px}
+  .work-info p{font-size:13px;margin:0;max-width:460px}
+  .tag-list{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}
+  .tag{border:1px solid var(--line);border-radius:99px;padding:5px 9px;font:10px monospace}
+  .process{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .process-card{min-height:230px;border:1px solid var(--ink);border-radius:16px;padding:21px;display:flex;flex-direction:column;justify-content:space-between}
+  .process-card:nth-child(1){background:var(--lime)}
+  .process-card:nth-child(2){background:#d8d0ff}
+  .process-card:nth-child(3){background:#ffbda9}
+  .process-num{font:700 11px monospace}
+  .process-card h3{font-size:29px;line-height:.95;letter-spacing:-.07em;margin:28px 0 8px}
+  .process-card p{font-size:13px;margin:0;max-width:280px}
+  .about{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}
+  .about h2{font-size:clamp(52px,8vw,98px);line-height:.82;letter-spacing:-.09em;margin:10px 0}
+  .about-copy{font-size:19px;max-width:620px}
+  .about-copy p:first-child{margin-top:0}
+  .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+  .skills span{background:var(--ink);color:var(--bg);padding:8px 12px;border-radius:99px;font:11px monospace}
+  .contact{background:var(--blue);border-radius:18px;padding:clamp(28px,7vw,76px);position:relative;overflow:hidden}
+  .contact:after{content:"↗";position:absolute;right:5%;top:-15%;font-size:clamp(120px,25vw,330px);font-weight:900;color:rgba(255,255,255,.25);transform:rotate(12deg)}
+  .contact h2{position:relative;z-index:1;font-size:clamp(48px,9vw,110px);line-height:.82;letter-spacing:-.09em;margin:14px 0;max-width:760px}
+  .contact p{position:relative;z-index:1;max-width:400px}
+  .contact .button{position:relative;z-index:1;background:var(--ink);color:var(--bg);margin-top:14px}
+  footer{display:flex;justify-content:space-between;gap:15px;padding:24px 0 32px;font:10px monospace;text-transform:uppercase}
+  .reveal{opacity:0;transform:translateY(18px);transition:.7s ease}
+  .reveal.visible{opacity:1;transform:none}
+  @media(max-width:760px){
+    .nav{display:none;position:absolute;z-index:5;top:68px;left:4vw;right:4vw;padding:20px;background:var(--bg);border:1px solid var(--ink);border-radius:14px;flex-direction:column;align-items:flex-start}
+    .nav.open{display:flex}.menu{display:block}
+    .hero{grid-template-columns:1fr;padding:50px 0 55px;gap:0}
+    .hero-visual{min-height:340px;grid-row:1}
+    .hero-copy{grid-row:2}
+    .planet{width:270px}
+    .section-heading,.approach,.about{display:grid;grid-template-columns:1fr;gap:22px}
+    .work-grid{grid-template-columns:1fr}
+    .work-art{height:235px}
+    .process{grid-template-columns:1fr}
+    section{padding:72px 0}
+    footer{flex-direction:column}
   }
-  a { color: inherit; }
-  button { font: inherit; color: inherit; }
-  .shell { width: min(1280px, 92vw); margin: auto; }
-  .topbar {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 22px 0; border-bottom: 1px solid var(--line);
-  }
-  .brand { text-decoration: none; font-weight: 900; letter-spacing: -.06em; font-size: 22px; }
-  .brand span { color: #7a61e8; }
-  .navlinks { display: flex; gap: 28px; align-items: center; }
-  .navlinks a { text-decoration: none; font-size: 13px; font-weight: 700; }
-  .navlinks a:hover { text-decoration: underline; text-underline-offset: 5px; }
-  .menu-button {
-    display: none; border: 1px solid var(--ink); border-radius: 99px;
-    padding: 9px 15px; background: transparent; font-weight: 700;
-  }
-  .hero {
-    min-height: 690px; padding: 72px 0 48px; display: grid;
-    grid-template-columns: 1.15fr .85fr; gap: 30px; align-items: center;
-  }
-  .kicker {
-    text-transform: uppercase; letter-spacing: .14em;
-    font: 700 11px/1.4 monospace;
-  }
-  h1 {
-    max-width: 780px; margin: 20px 0 25px;
-    font-size: clamp(62px, 10vw, 132px); line-height: .84;
-    letter-spacing: -.09em; font-weight: 900;
-  }
-  h1 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
-  .hero-copy p { max-width: 460px; font-size: 18px; }
-  .cta-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-  .pill {
-    display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
-    border: 1px solid var(--ink); border-radius: 99px; padding: 12px 18px;
-    font-size: 13px; font-weight: 800; transition: .2s;
-  }
-  .pill:hover { transform: translateY(-3px); box-shadow: 3px 4px 0 var(--ink); }
-  .pill.dark { background: var(--ink); color: var(--paper); }
-  .hero-art { min-height: 465px; position: relative; display: grid; place-items: center; }
-  .art-card {
-    z-index: 1; width: min(390px, 90%); height: 420px; background: var(--lime);
-    border: 1px solid var(--ink); border-radius: 200px 200px 22px 22px;
-    position: relative; overflow: hidden; transform: rotate(3deg);
-    box-shadow: 12px 12px 0 var(--ink);
-  }
-  .art-card::before {
-    content: ""; position: absolute; width: 320px; height: 320px;
-    border: 1px solid var(--ink); border-radius: 50%;
-    top: 42px; left: 36px; animation: orbit 18s linear infinite;
-  }
-  .art-card::after {
-    content: ""; position: absolute; width: 220px; height: 220px;
-    border-radius: 50%; top: 88px; left: 85px; background: var(--purple);
-    border: 1px solid var(--ink); box-shadow: 0 0 0 18px rgba(183,163,255,.3);
-  }
-  .orb-dot {
-    position: absolute; z-index: 2; width: 24px; height: 24px;
-    border-radius: 50%; background: var(--orange); border: 1px solid var(--ink);
-    top: 66px; left: 78px;
-  }
-  .art-label {
-    position: absolute; z-index: 3; bottom: 24px; left: 22px;
-    background: var(--paper); border: 1px solid var(--ink); border-radius: 14px;
-    padding: 12px 15px; font: 700 12px/1.5 monospace; transform: rotate(-4deg);
-  }
-  .art-index {
-    position: absolute; right: 0; top: 18px; writing-mode: vertical-rl;
-    font: 700 10px monospace; letter-spacing: .12em;
-  }
-  @keyframes orbit { to { transform: rotate(360deg); } }
-  .ticker {
-    overflow: hidden; background: var(--ink); color: var(--paper);
-    padding: 15px 0; white-space: nowrap;
-  }
-  .ticker-track { display: inline-block; animation: ticker 24s linear infinite; }
-  .ticker span { margin: 0 24px; font: 800 13px monospace; letter-spacing: .08em; }
-  .ticker b { color: var(--lime); }
-  @keyframes ticker { to { transform: translateX(-50%); } }
-  section { padding: 105px 0; border-bottom: 1px solid var(--line); }
-  .section-top {
-    display: flex; justify-content: space-between; align-items: end;
-    gap: 24px; margin-bottom: 42px;
-  }
-  .section-top h2 {
-    margin: 10px 0 0; font-size: clamp(42px, 7vw, 82px);
-    letter-spacing: -.08em; line-height: .9;
-  }
-  .section-top p { max-width: 360px; margin: 0; font-size: 15px; }
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
-  .filter {
-    cursor: pointer; border: 1px solid var(--ink); border-radius: 99px;
-    background: transparent; padding: 8px 14px; font-size: 12px; font-weight: 700;
-  }
-  .filter.active, .filter:hover { background: var(--ink); color: var(--paper); }
-  .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .project {
-    min-height: 340px; padding: 22px; border: 1px solid var(--ink);
-    border-radius: 18px; display: flex; flex-direction: column;
-    justify-content: space-between; overflow: hidden; transition: .25s;
-  }
-  .project:hover { transform: translateY(-5px); box-shadow: 6px 7px 0 var(--ink); }
-  .project[hidden] { display: none; }
-  .project:nth-child(1) { background: var(--purple); }
-  .project:nth-child(2) { background: var(--lime); }
-  .project:nth-child(3) { background: #ffc9b9; }
-  .project:nth-child(4) { background: #d8d5cc; }
-  .project-meta { display: flex; justify-content: space-between; font: 700 11px monospace; text-transform: uppercase; }
-  .project-graphic {
-    height: 135px; margin: 24px 0 16px; border: 1px solid var(--ink);
-    border-radius: 12px; background: rgba(255,255,255,.3);
-    display: grid; place-items: center; position: relative; overflow: hidden;
-  }
-  .project-graphic .window {
-    width: 70%; height: 76%; background: var(--paper);
-    border: 1px solid var(--ink); border-radius: 8px; padding: 10px;
-    box-shadow: 5px 5px 0 rgba(21,21,21,.18); transform: rotate(-3deg);
-  }
-  .window i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); margin-right: 3px; }
-  .window .bar { height: 7px; width: 60%; background: var(--ink); opacity: .85; margin: 12px 0 7px; border-radius: 5px; }
-  .window .line { height: 4px; width: 90%; background: #aaa; margin: 5px 0; border-radius: 5px; }
-  .project h3 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.06em; margin: 4px 0; }
-  .project p { max-width: 420px; margin: 0; font-size: 14px; }
-  .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 16px; }
-  .tag { border: 1px solid rgba(21,21,21,.55); border-radius: 99px; padding: 5px 9px; font: 11px monospace; }
-  .journey { display: grid; grid-template-columns: .8fr 1.2fr; gap: 55px; }
-  .journey h2 { margin: 10px 0; font-size: clamp(42px, 7vw, 78px); line-height: .9; letter-spacing: -.08em; }
-  .journey-intro { max-width: 360px; }
-  .steps { border-top: 1px solid var(--ink); }
-  .step { display: grid; grid-template-columns: 75px 1fr; gap: 15px; padding: 23px 0; border-bottom: 1px solid var(--line); }
-  .step-num { font: 700 12px monospace; color: #6e59d4; }
-  .step h3 { margin: 0 0 5px; font-size: 22px; letter-spacing: -.04em; }
-  .step p { margin: 0; max-width: 500px; font-size: 14px; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-  .about-grid h2 { margin: 10px 0; font-size: clamp(48px, 8vw, 92px); line-height: .88; letter-spacing: -.08em; }
-  .about-copy { font-size: 19px; max-width: 580px; }
-  .skill-list { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 25px; }
-  .skill-list span { background: var(--ink); color: var(--paper); padding: 8px 12px; border-radius: 99px; font-size: 12px; }
-  .contact {
-    background: var(--ink); color: var(--paper); padding: clamp(28px, 7vw, 76px);
-    border-radius: 22px; position: relative; overflow: hidden;
-  }
-  .contact::after {
-    content: "✳"; position: absolute; right: 4%; top: 3%; color: var(--lime);
-    font-size: clamp(100px, 22vw, 280px); line-height: 1; opacity: .9;
-    animation: orbit 24s linear infinite;
-  }
-  .contact h2 { position: relative; z-index: 1; max-width: 760px; margin: 14px 0; font-size: clamp(48px, 9vw, 106px); line-height: .85; letter-spacing: -.08em; }
-  .contact p { position: relative; z-index: 1; color: #c8c8c1; max-width: 390px; }
-  .contact .pill { position: relative; z-index: 1; background: var(--lime); color: var(--ink); margin-top: 15px; }
-  footer {
-    display: flex; justify-content: space-between; gap: 20px;
-    padding: 25px 0 35px; font: 11px monospace; text-transform: uppercase;
-  }
-  .reveal { opacity: 0; transform: translateY(18px); transition: .7s ease; }
-  .reveal.show { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
-  }
-  @media (max-width: 760px) {
-    .navlinks { display: none; position: absolute; top: 70px; left: 4vw; right: 4vw; z-index: 10;
-      background: var(--paper); border: 1px solid var(--ink); border-radius: 14px;
-      padding: 20px; flex-direction: column; align-items: flex-start; gap: 18px; }
-    .navlinks.open { display: flex; }
-    .menu-button { display: inline-block; }
-    .hero { grid-template-columns: 1fr; padding-top: 45px; gap: 4px; }
-    .hero-art { min-height: 400px; }
-    .art-card { height: 350px; width: 300px; }
-    .art-card::before { width: 250px; height: 250px; left: 24px; top: 38px; }
-    .art-card::after { width: 170px; height: 170px; left: 65px; top: 78px; }
-    .section-top, .journey, .about-grid { grid-template-columns: 1fr; display: grid; gap: 22px; }
-    .project-grid { grid-template-columns: 1fr; }
-    section { padding: 72px 0; }
-    footer { flex-direction: column; }
-  }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+/* Grayscale theme */
+:root {
+  --bg: #f5f5f5;
+  --ink: #111111;
+  --muted: #666666;
+  --blue: #777777;
+  --lime: #e5e5e5;
+  --line: rgba(17, 17, 17, .2);
+}
+
+.orbit-dot { background: #888888; }
+
+.work-card:nth-child(1) .work-art { background: #dedede; }
+.work-card:nth-child(2) .work-art { background: #c9c9c9; }
+.work-card:nth-child(3) .work-art { background: #b5b5b5; }
+.work-card:nth-child(4) .work-art { background: #e8e8e8; }
+
+.process-card:nth-child(1) { background: #e5e5e5; }
+.process-card:nth-child(2) { background: #cccccc; }
+.process-card:nth-child(3) { background: #b5b5b5; }
+
+.contact { background: #777777; color: #ffffff; }
+.contact .eyebrow, .contact p { color: #f0f0f0; }
+.contact .button { background: #111111; color: #ffffff; }
 </style>
 </head>
 <body>
-<div class="shell">
+<div class="container">
   <header class="topbar" id="top">
-    <a class="brand" href="#top">SEAN<span>.</span></a>
-    <nav class="navlinks" id="nav">
-      <a href="#work">Selected work ↘</a>
-      <a href="#journey">My process ↘</a>
-      <a href="#about">About ↘</a>
-      <a href="#contact">Contact ↘</a>
+    <a class="logo" href="#top">SEAN<span>®</span></a>
+    <nav class="nav" id="nav">
+      <a href="#approach">01 Approach</a><a href="#work">02 Work</a>
+      <a href="#about">03 About</a><a class="contact-link" href="#contact">Say hello ↗</a>
     </nav>
-    <button class="menu-button" id="menuBtn" aria-expanded="false">Menu +</button>
+    <button class="menu" id="menu" aria-expanded="false">Menu +</button>
   </header>
 
   <main>
     <section class="hero" style="border:0">
       <div class="hero-copy reveal">
-        <div class="kicker">Student portfolio · 2026</div>
-        <h1>Curious<br>by <span class="outline">design.</span></h1>
-        <p>I’m Sean, a student learning to turn ideas into working projects. Here’s a look at what I’ve been building and what I’m learning along the way.</p>
-        <div class="cta-row">
-          <a class="pill dark" href="#work">Explore my work <span>↘</span></a>
-          <a class="pill" href="#about">Meet Sean <span>↘</span></a>
-        </div>
+        <div class="eyebrow">Student · Programmer in progress · Philippines</div>
+        <h1>Ideas<br>into <span class="stroke">action.</span></h1>
+        <p>I’m Sean. I’m learning to build useful things with code, one project at a time. Here’s what I’ve been working on.</p>
+        <div class="actions"><a class="button primary" href="#work">Explore my work <span>↘</span></a><a class="button" href="#about">About me <span>↘</span></a></div>
       </div>
-      <div class="hero-art reveal">
-        <div class="art-index">A WORK IN PROGRESS · ALWAYS LEARNING</div>
-        <div class="art-card"><span class="orb-dot"></span><div class="art-label">LEARN / BUILD / REPEAT<br>✳ SEAN TRINIDAD</div></div>
+      <div class="hero-visual reveal">
+        <div class="visual-index">PORTFOLIO / 2026</div>
+        <div class="planet"><div class="planet-core"></div><div class="orbit-dot"></div></div>
+        <div class="visual-note">LEARN → BUILD → IMPROVE<br>SEAN TRINIDAD</div>
       </div>
     </section>
   </main>
 </div>
 
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span>STUDENT <b>✳</b> BUILDER <b>✳</b> CURIOUS MIND <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> STUDENT <b>✳</b> BUILDER <b>✳</b> CURIOUS MIND <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b></span>
-    <span>STUDENT <b>✳</b> BUILDER <b>✳</b> CURIOUS MIND <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> STUDENT <b>✳</b> BUILDER <b>✳</b> CURIOUS MIND <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b></span>
-  </div>
-</div>
+<div class="marquee"><div class="marquee-track">
+  <span>JAVA <b>✳</b> SQL <b>✳</b> STUDENT PROJECTS <b>✳</b> LEARNING BY BUILDING <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> STUDENT PROJECTS <b>✳</b> LEARNING BY BUILDING <b>✳</b></span>
+  <span>JAVA <b>✳</b> SQL <b>✳</b> STUDENT PROJECTS <b>✳</b> LEARNING BY BUILDING <b>✳</b> JAVA <b>✳</b> SQL <b>✳</b> STUDENT PROJECTS <b>✳</b> LEARNING BY BUILDING <b>✳</b></span>
+</div></div>
 
-<div class="shell">
-  <section id="work">
-    <div class="section-top reveal">
-      <div><div class="kicker">01 / Selected work</div><h2>Learning<br>by making.</h2></div>
-      <p>Small projects from my coursework. Choose a topic to filter the collection. I can add real screenshots and project links later.</p>
+<div class="container">
+  <section id="approach">
+    <div class="section-heading reveal">
+      <div><div class="eyebrow">01 / My approach</div><h2>Build with<br>purpose.</h2></div>
+      <p>I turn lessons into projects so I can understand how ideas work outside the classroom.</p>
     </div>
-    <div class="filters reveal" aria-label="Filter projects">
-      <button class="filter active" data-filter="all">All work</button>
+    <div class="approach">
+      <div class="approach-text reveal"><p>Every project starts with a question: <strong>what can I make work?</strong></p><p>Then I learn by trying, fixing, and improving.</p></div>
+      <div class="principles reveal">
+        <div class="principle"><span class="num">01</span><div><h3>Start with the essentials.</h3><p>Understand the goal and break it into smaller steps.</p></div><span class="plus">↗</span></div>
+        <div class="principle"><span class="num">02</span><div><h3>Make a working version.</h3><p>Use the concepts I know to build a simple solution.</p></div><span class="plus">↗</span></div>
+        <div class="principle"><span class="num">03</span><div><h3>Keep getting better.</h3><p>Review the result, find what to improve, and keep learning.</p></div><span class="plus">↗</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-heading reveal">
+      <div><div class="eyebrow">02 / Selected work</div><h2>Made while<br>learning.</h2></div>
+      <p>A few of my coursework projects. Use the filters to browse by topic.</p>
+    </div>
+    <div class="filters reveal">
+      <button class="filter active" data-filter="all">All projects</button>
       <button class="filter" data-filter="java">Java</button>
       <button class="filter" data-filter="swing">Interface</button>
       <button class="filter" data-filter="sql">SQL</button>
     </div>
-    <div class="project-grid">
-      <article class="project reveal" data-category="java">
-        <div class="project-meta"><span>Java · OOP</span><span>01</span></div>
-        <div>
-          <div class="project-graphic"><div class="window"><i></i><i></i><i></i><div class="bar"></div><div class="line"></div><div class="line"></div></div></div>
-          <h3>Lost & Found</h3><p>A class project for recording and searching lost and found items.</p>
-          <div class="tags"><span class="tag">Classes</span><span class="tag">Arrays</span><span class="tag">Inheritance</span></div>
-        </div>
+    <div class="work-grid">
+      <article class="work-card reveal" data-category="java">
+        <div class="work-art"><div class="mock-screen"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-title">LOST<br>& FOUND</div><div class="mock-line"></div><div class="mock-line short"></div></div></div>
+        <div class="work-info"><div class="work-meta"><span>Java · OOP</span><span>Project 01</span></div><h3>Lost & Found</h3><p>A class project for recording and searching lost and found items.</p><div class="tag-list"><span class="tag">Classes</span><span class="tag">Arrays</span><span class="tag">Inheritance</span></div></div>
       </article>
-      <article class="project reveal" data-category="swing java">
-        <div class="project-meta"><span>Java · Swing</span><span>02</span></div>
-        <div>
-          <div class="project-graphic"><div class="window"><i></i><i></i><i></i><div class="bar"></div><div class="line"></div><div class="line"></div></div></div>
-          <h3>Student COR</h3><p>A student record interface with tuition fee input and calculation.</p>
-          <div class="tags"><span class="tag">GUI</span><span class="tag">Input</span><span class="tag">Calculations</span></div>
-        </div>
+      <article class="work-card reveal" data-category="swing java">
+        <div class="work-art"><div class="mock-screen"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-title">STUDENT<br>RECORD</div><div class="mock-line"></div><div class="mock-line short"></div></div></div>
+        <div class="work-info"><div class="work-meta"><span>Java · Swing</span><span>Project 02</span></div><h3>Student COR</h3><p>A student record interface with tuition fee input and calculation.</p><div class="tag-list"><span class="tag">GUI</span><span class="tag">Input</span><span class="tag">Calculations</span></div></div>
       </article>
-      <article class="project reveal" data-category="java">
-        <div class="project-meta"><span>Java · Console</span><span>03</span></div>
-        <div>
-          <div class="project-graphic"><div class="window"><i></i><i></i><i></i><div class="bar"></div><div class="line"></div><div class="line"></div></div></div>
-          <h3>ATM Simulator</h3><p>A practice program for common ATM actions and basic program flow.</p>
-          <div class="tags"><span class="tag">Methods</span><span class="tag">Conditionals</span></div>
-        </div>
+      <article class="work-card reveal" data-category="java">
+        <div class="work-art"><div class="mock-screen"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-title">ATM<br>SIMULATOR</div><div class="mock-line"></div><div class="mock-line short"></div></div></div>
+        <div class="work-info"><div class="work-meta"><span>Java · Console</span><span>Project 03</span></div><h3>ATM Simulator</h3><p>A practice program for common ATM actions and basic program flow.</p><div class="tag-list"><span class="tag">Methods</span><span class="tag">Conditionals</span></div></div>
       </article>
-      <article class="project reveal" data-category="sql">
-        <div class="project-meta"><span>SQL · Database</span><span>04</span></div>
-        <div>
-          <div class="project-graphic"><div class="window"><i></i><i></i><i></i><div class="bar"></div><div class="line"></div><div class="line"></div></div></div>
-          <h3>Database Queries</h3><p>Practice with department and location data, table relationships, and queries.</p>
-          <div class="tags"><span class="tag">SELECT</span><span class="tag">JOIN</span><span class="tag">Keys</span></div>
-        </div>
+      <article class="work-card reveal" data-category="sql">
+        <div class="work-art"><div class="mock-screen"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-title">DATA<br>QUERIES</div><div class="mock-line"></div><div class="mock-line short"></div></div></div>
+        <div class="work-info"><div class="work-meta"><span>SQL · Database</span><span>Project 04</span></div><h3>Department Data</h3><p>Practice connecting department and location data and writing queries.</p><div class="tag-list"><span class="tag">SELECT</span><span class="tag">JOIN</span><span class="tag">Keys</span></div></div>
       </article>
     </div>
   </section>
 
-  <section id="journey">
-    <div class="journey">
-      <div class="journey-intro reveal">
-        <div class="kicker">02 / My process</div>
-        <h2>One step<br>at a time.</h2>
-        <p>I learn best by taking an idea, making a first version, and improving it as I understand more.</p>
-      </div>
-      <div class="steps reveal">
-        <div class="step"><div class="step-num">STEP 01</div><div><h3>Explore the idea.</h3><p>Figure out what the project should do and break it into manageable parts.</p></div></div>
-        <div class="step"><div class="step-num">STEP 02</div><div><h3>Build a first version.</h3><p>Use the concepts I’ve learned to make a simple working solution.</p></div></div>
-        <div class="step"><div class="step-num">STEP 03</div><div><h3>Learn and improve.</h3><p>Review what works, fix what doesn’t, and keep adding to my skills.</p></div></div>
-      </div>
+  <section>
+    <div class="section-heading reveal"><div><div class="eyebrow">03 / The process</div><h2>Small steps.<br>Real progress.</h2></div><p>I’m building my skills through practice, curiosity, and steady improvement.</p></div>
+    <div class="process">
+      <article class="process-card reveal"><span class="process-num">STEP 01 / EXPLORE</span><div><h3>Ask better<br>questions.</h3><p>Get clear on what a project needs to do.</p></div></article>
+      <article class="process-card reveal"><span class="process-num">STEP 02 / BUILD</span><div><h3>Make it<br>work.</h3><p>Turn class concepts into a first version.</p></div></article>
+      <article class="process-card reveal"><span class="process-num">STEP 03 / IMPROVE</span><div><h3>Learn from<br>the result.</h3><p>Review, adjust, and add to what I know.</p></div></article>
     </div>
   </section>
 
   <section id="about">
-    <div class="about-grid">
-      <div class="reveal"><div class="kicker">03 / About me</div><h2>Hi, I’m<br>Sean.</h2></div>
-      <div class="about-copy reveal">
-        <p>I’m a student building my skills in programming and problem solving. I enjoy turning lessons into projects I can test, explain, and improve.</p>
-        <p>This portfolio is a snapshot of my learning so far. It’ll keep growing as I take on new challenges.</p>
-        <div class="skill-list"><span>Java</span><span>SQL</span><span>C</span><span>Problem solving</span><span>Always learning</span></div>
-      </div>
+    <div class="about">
+      <div class="reveal"><div class="eyebrow">04 / About Sean</div><h2>Curious<br>by nature.</h2></div>
+      <div class="about-copy reveal"><p>I’m a student developing my programming and problem-solving skills. I enjoy taking what I learn in class and turning it into something I can test and improve.</p><p>This portfolio is a snapshot of my work so far, and I’ll keep adding to it as I learn.</p><div class="skills"><span>Java</span><span>SQL</span><span>C</span><span>Problem solving</span><span>Learning every day</span></div></div>
     </div>
   </section>
 
   <section id="contact" style="border:0">
-    <div class="contact reveal">
-      <div class="kicker">04 / Get in touch</div>
-      <h2>Let’s make<br>something good.</h2>
-      <p>Have a question about a project or want to connect? Send me a message.</p>
-      <a class="pill" href="mailto:your.email@example.com">Email Sean ↗</a>
-    </div>
+    <div class="contact reveal"><div class="eyebrow">Have a question?</div><h2>Let’s talk<br>about it.</h2><p>Reach out about a project, an idea, or just to say hello.</p><a class="button" href="mailto:your.email@example.com">Email Sean ↗</a></div>
   </section>
-  <footer><span>© 2026 Sean Aldrich Trinidad</span><a href="#top">Back to top ↑</a><span>Built while learning ✳</span></footer>
+  <footer><span>© 2026 Sean Aldrich Trinidad</span><a href="#top">Back to top ↑</a><span>Portfolio in progress</span></footer>
 </div>
+
 <script>
-  const menuBtn = document.getElementById("menuBtn");
-  const nav = document.getElementById("nav");
-  menuBtn.addEventListener("click", () => {
+  const menu = document.querySelector(".menu");
+  const nav = document.querySelector(".nav");
+  menu.addEventListener("click", () => {
     const open = nav.classList.toggle("open");
-    menuBtn.setAttribute("aria-expanded", open);
-    menuBtn.textContent = open ? "Close −" : "Menu +";
+    menu.setAttribute("aria-expanded", open);
+    menu.textContent = open ? "Close −" : "Menu +";
   });
   nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
     nav.classList.remove("open");
-    menuBtn.setAttribute("aria-expanded", "false");
-    menuBtn.textContent = "Menu +";
+    menu.setAttribute("aria-expanded", "false");
+    menu.textContent = "Menu +";
   }));
   document.querySelectorAll(".filter").forEach(button => {
     button.addEventListener("click", () => {
       document.querySelector(".filter.active").classList.remove("active");
       button.classList.add("active");
       const category = button.dataset.filter;
-      document.querySelectorAll(".project").forEach(card => {
+      document.querySelectorAll(".work-card").forEach(card => {
         card.hidden = category !== "all" && !card.dataset.category.includes(category);
       });
     });
@@ -347,11 +275,11 @@
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("show");
+        entry.target.classList.add("visible");
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: .12 });
   document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 </script>
 </body>
